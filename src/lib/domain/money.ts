@@ -8,7 +8,7 @@ const zar = new Intl.NumberFormat("en-ZA", {
 });
 
 /** Formats cents as "R 1 234,56" (en-ZA convention). */
-export function formatZAR(cents: Cents, opts: { signed?: boolean } = {}): string {
+export function formatZAR(cents: Cents, opts: { signed?: boolean | undefined } = {}): string {
   const formatted = zar.format(Math.abs(cents) / 100).replace(/\u00a0/g, " ");
   if (cents < 0) return `−${formatted}`;
   if (opts.signed && cents > 0) return `+${formatted}`;

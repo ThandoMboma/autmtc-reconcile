@@ -69,7 +69,7 @@ export interface TransactionAnalysis {
   transactionId: string;
   best: MatchProposal | null;
   alternatives: MatchProposal[];
-  duplicateOf?: string;
+  duplicateOf?: string | undefined;
 }
 
 export interface Reconciliation {
@@ -99,5 +99,5 @@ export interface ActivityEntry {
   at: string;
   kind: ActivityKind;
   message: string;
-  amount?: Cents;
+  amount?: Cents | undefined;
 }

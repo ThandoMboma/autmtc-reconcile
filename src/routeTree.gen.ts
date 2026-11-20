@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InvoicesRouteImport } from './routes/invoices'
+import { Route as ReconciliationRouteImport } from './routes/reconciliation'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +25,16 @@ const InvoicesRoute = InvoicesRouteImport.update({
   path: '/invoices',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReconciliationRoute = ReconciliationRouteImport.update({
+  id: '/reconciliation',
+  path: '/reconciliation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransactionsRoute = TransactionsRouteImport.update({
   id: '/transactions',
   path: '/transactions',
@@ -32,30 +44,45 @@ const TransactionsRoute = TransactionsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/invoices': typeof InvoicesRoute
+  '/reconciliation': typeof ReconciliationRoute
+  '/reports': typeof ReportsRoute
   '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/invoices': typeof InvoicesRoute
+  '/reconciliation': typeof ReconciliationRoute
+  '/reports': typeof ReportsRoute
   '/transactions': typeof TransactionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/invoices': typeof InvoicesRoute
+  '/reconciliation': typeof ReconciliationRoute
+  '/reports': typeof ReportsRoute
   '/transactions': typeof TransactionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/invoices' | '/transactions'
+  fullPaths:
+    '/' | '/invoices' | '/reconciliation' | '/reports' | '/transactions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/invoices' | '/transactions'
-  id: '__root__' | '/' | '/invoices' | '/transactions'
+  to: '/' | '/invoices' | '/reconciliation' | '/reports' | '/transactions'
+  id:
+    | '__root__'
+    | '/'
+    | '/invoices'
+    | '/reconciliation'
+    | '/reports'
+    | '/transactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InvoicesRoute: typeof InvoicesRoute
+  ReconciliationRoute: typeof ReconciliationRoute
+  ReportsRoute: typeof ReportsRoute
   TransactionsRoute: typeof TransactionsRoute
 }
 
@@ -75,6 +102,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InvoicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reconciliation': {
+      id: '/reconciliation'
+      path: '/reconciliation'
+      fullPath: '/reconciliation'
+      preLoaderRoute: typeof ReconciliationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transactions': {
       id: '/transactions'
       path: '/transactions'
@@ -88,6 +129,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InvoicesRoute: InvoicesRoute,
+  ReconciliationRoute: ReconciliationRoute,
+  ReportsRoute: ReportsRoute,
   TransactionsRoute: TransactionsRoute,
 }
 export const routeTree = rootRouteImport
